@@ -162,17 +162,17 @@ end
 close all
 fg = figure('DefaultAxesFontSize',13); set(gcf,'Position',[0 0 1500 800]);  
 
-subplot(3,2,1);
-ba = bar(data_percentages,'stacked','FaceColor','flat'); xticks([1:7]);
-ba(1).CData = [140/255 81/255 10/255]; ba(2).CData = [216/255 179/255 101/255]; ba(3).CData = [246/255 232/255 195/255]; 
-ba(4).CData = [245/255 245/255 245/255]; ba(5).CData = [199/255 234/255 229/255]; ba(6).CData = [90/255 180/255 172/255];
-ba(7).CData = [1/255 102/255 94/255];
-labels = {'SUN n=11','MON n=22','TUE n=77','WED n=142','THU n=72','FRI n=22','SAT n=0'}; 
-labels = cellfun(@(x) strrep(x,' ','\newline'), labels,'UniformOutput',false);
-xticklabels(labels);
-ylim([0 80]); ylabel('Litter flux (items/hr)'); grid on; %title('Mean item fluxes per weekday'); 
+% subplot(3,2,1);
+% ba = bar(data_percentages,'stacked','FaceColor','flat'); xticks([1:7]);
+% ba(1).CData = [140/255 81/255 10/255]; ba(2).CData = [216/255 179/255 101/255]; ba(3).CData = [246/255 232/255 195/255]; 
+% ba(4).CData = [245/255 245/255 245/255]; ba(5).CData = [199/255 234/255 229/255]; ba(6).CData = [90/255 180/255 172/255];
+% ba(7).CData = [1/255 102/255 94/255];
+% labels = {'SUN n=11','MON n=22','TUE n=77','WED n=142','THU n=72','FRI n=22','SAT n=0'}; 
+% labels = cellfun(@(x) strrep(x,' ','\newline'), labels,'UniformOutput',false);
+% xticklabels(labels);
+% ylim([0 80]); ylabel('Litter flux (items/hr)'); grid on; %title('Mean item fluxes per weekday'); 
 
-subplot(3,2,2)
+subplot(3,1,1)
 ba = bar(bridgeFlux','stacked','FaceColor','flat'); xticks([1:6]);
 ba(1).CData = [140/255 81/255 10/255]; ba(2).CData = [216/255 179/255 101/255]; ba(3).CData = [246/255 232/255 195/255]; 
 ba(4).CData = [245/255 245/255 245/255]; ba(5).CData = [199/255 234/255 229/255]; ba(6).CData = [90/255 180/255 172/255];
@@ -197,14 +197,14 @@ ylim([0 60]); xlim([6 19]); ylabel('Litter flux (items/hr)'); %title('Mean item 
 
 
 subplot(3,1,3)
-ba = bar(squeeze(mean(data_bridge_month))','stacked','FaceColor','flat'); xticks([1:13]);
+ba = bar(squeeze(sum(data_bridge_month,2))','stacked','FaceColor','flat'); xticks([1:13]);
 ba(1).CData = [140/255 81/255 10/255]; ba(2).CData = [216/255 179/255 101/255]; ba(3).CData = [246/255 232/255 195/255]; 
 ba(4).CData = [245/255 245/255 245/255]; ba(5).CData = [199/255 234/255 229/255]; ba(6).CData = [90/255 180/255 172/255];
 ba(7).CData = [1/255 102/255 94/255];
 labels = {'Feb-21 n=11','Mar-21 n=55','Apr-21 n=44','May-21 n=11','Jun-21 n=22','Jul-21 n=32','Aug-21 n=11','Sep-21 n=54','Okt-21 n=22','Nov-21 n=33','Dec-21 n=17','Jan-22 n=22','Feb-22 n=11'};
 labels = cellfun(@(x) strrep(x,' ','\newline'), labels,'UniformOutput',false);
 xticklabels(labels); grid on;
-ylim([0 120]); ylabel('Litter flux (items/hr)'); %title('Mean item flux per month'); 
+ylim([0 750]); ylabel('Litter flux (items/hr)'); %title('Mean item flux per month'); 
 AddLetters2Plots(fg,{'(a)','(b)','(c)','(d)'},'HShift',0,'VShift',0,'Direction','LeftRight','FontSize',15)
 
 %% Correlation analyses
@@ -317,7 +317,7 @@ figure('DefaultAxesFontSize',13); set(gcf,'Position',[100 100 950 400]);
 imagesc(R_matrix); text(y(:), x(:), t, 'HorizontalAlignment', 'Center');
 set(gca, 'XTick', 1:8); % center x-axis ticks on bins
 set(gca, 'YTick', 1:5); % center y-axis ticks on bins
-set(gca, 'XTickLabel', {'PET','PS','EPS','PO Hard','PO Soft','Multilayer','Other','Combined'}); % set x-axis labels
+set(gca, 'XTickLabel', {'PET','PS','EPS','PO Hard','PO Soft','Multilayer','Other','Total'}); % set x-axis labels
 set(gca, 'YTickLabel', {'Rainfall (mm)','Sunlight (hrs)','Windspeed avg (m/s)','Windspeed max (m/s)','Tide'}); % set y-axis labels
 colormap(RedToBlue); a = colorbar; caxis([-.2 .2]); ylabel(a, 'r^2')
 %% Plotting boxplots
